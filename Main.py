@@ -5,9 +5,9 @@ import time
 import logging
 from pathlib import Path
 
-#/Users/joshmorg/Documents/100_days_of_code/Source_Dest/source/
 
 
+#User input and instructions
 source_folder = input("Enter Source Folder Path ")
 parent = Path(source_folder).resolve().parents[0]
 replica_folder = input("Enter Replica Folder Path or enter 'no' to ignore. ")
@@ -23,7 +23,7 @@ else:
 time_interval = int(input("Synchronization: Enter time interval (sec): "))
 
 
-
+#Program mechanism
 def sync():
 
     if not os.path.isdir(source_folder):
@@ -46,11 +46,13 @@ def sync():
             raise SystemExit
 
 
+#Hash mechanism
 def c_files(file1, file2):
         with open(file1, "rb") as f1, open(file2, "rb") as f2:
             return hashlib.md5(f1.read()).hexdigest() == hashlib.md5(f2.read()).hexdigest()
 
 
+#File syncronization mechanism
 def date_2():
     os.chdir(source_folder)
     s_items = sorted(filter(os.path.isfile, os.listdir(source_folder)), key=os.path.getmtime)
@@ -88,7 +90,7 @@ def date_2():
             logging.info(log_mes)
             print(log_mes)
 
-
+#Logs Mechanism 
 def log():
     if not log_file:
         logging.basicConfig(filename=log_file, format=f'%(asctime)s %(message)s\n', filemode='w')
